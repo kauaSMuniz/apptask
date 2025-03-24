@@ -7,20 +7,39 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-item>
-  <ion-input [(ngModel)]="newTask" placeholder="Adicionar nova tarefa">
+  
 
-  </ion-input>
-  <ion-button (click) = "addTask()">
-    Adicionar
-  </ion-button>
+  <ion-item>
+    <ion-input [(ngModel)]="newTask" placeholder="Adicionar nova Tarefa">
 
-</ion-item>
-<ion-list>
-  <ion-item *ngFor = "let tarefa of task">
-    <ion-label>
-      {{tarefa.title}}
-    </ion-label>
+    </ion-input>
+
+    <ion-button (click)="addTask()">
+      Adicionar
+    </ion-button>
+
   </ion-item>
-</ion-list>
+
+  <ion-list>
+
+    <ion-item *ngFor="let tarefa of filteredTask">
+    <ion-label 
+    [ngClass]="{'completado-task': tarefa.completed}">
+      {{ tarefa.title }}
+    </ion-label>
+
+    <ion-button fill="clear" (click)="concluir(tarefa.id)">
+      <ion-icon [name]="tarefa.completed ? 'checkmark-circle':'ellipse-outline'">
+
+      </ion-icon>
+
+    </ion-button>
+
+    </ion-item>
+
+  </ion-list>
+
+  <ion-button expanded = "full" (click) = "mostrarOcultar()">Mostrar/ocultar</ion-button>
+
+
 </ion-content>
